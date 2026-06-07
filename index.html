@@ -1,19 +1,37 @@
-import qrcode
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
 
-upi_id =input("Enter your UPI ID =")
+    <link rel="stylesheet" href="style.css">
 
-phonepe_url= f'upi://pay?pa={upi_id}&pn=Recipient%20Name&mc=1234'
-paytm_url= f'upi://pay?pa={upi_id}&pn=Recipient%20Name&mc=1234'
-google_pay_url= f'upi://pay?pa={upi_id}&pn=Recipient%20Name&mc=1234'
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
 
-phonepe_qr =qrcode.make(phonepe_url)
-paytm_qr =qrcode.make(paytm_url)
-google_pay_qr=qrcode.make(google_pay_url)
+    <div class="container">
+        <h1>QR Code Generator</h1>
 
-phonepe_qr.save('phonepe_qr.png')
-paytm_qr.save('paytm_qr.png')
-google_pay_qr.save('google_pay_qr.png')
+        <input type="text" id="text" placeholder="Enter text or URL">
 
-phonepe_qr.show()
-paytm_qr.show()
-google_pay_qr.show()
+        <button onclick="generateQR()">Generate QR</button>
+
+        <div id="qrcode"></div>
+    </div>
+
+    <script>
+        function generateQR() {
+            document.getElementById("qrcode").innerHTML = "";
+
+            new QRCode(document.getElementById("qrcode"), {
+                text: document.getElementById("text").value,
+                width: 200,
+                height: 200
+            });
+        }
+    </script>
+
+</body>
+</html>
